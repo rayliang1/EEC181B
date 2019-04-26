@@ -1,3 +1,6 @@
+// update: Changed P, Q assignment with lines taken from important_changes
+// output: still nan
+
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -205,13 +208,12 @@ void sgd(int iter, int Prows, int Pcols, int Qrows, int Qcols){
 			P_i[x] = P[i][x];
 		
 		// Done per column; cannot operate on both columns. Check the math for the 2 lines below:
-		for(x=0; x<Pcols; x++)												// Heavy assumption that Pcols = Qcols
-			P[i][x] = P[i][x] + alpha * (e * Q[j][x] - beta * P[i][x]);		// Previously Q[j][x]
+		for(x=0; x<Pcols; x++){		
+			P[i][x] = P[i][x] + alpha * (e * Q[j][x] - beta * P[i][x]);
+			P_i[x] = P[i][x];
+		}
 		for(x=0; x<Pcols; x++)
 			Q[j][x] = Q[j][x] + alpha * (e * P_i[x] - beta * Q[j][x]);
-		
-		// TRY REPLACE WITH Q[X][J]
-		
 		
 		// free(P_i);
 	}
