@@ -1,0 +1,138 @@
+i = 3, j = 3, r = 3
+
+---------------------------------------------------------------------------
+In the Python console:
+
+e = 
+0.23279564738785163
+
+
+[0.         0.         0.         0.02327956 0.        ]
+
+
+[0.         0.         0.         0.02327956]
+
+
+P :
+[[-0.92699867  0.35551501]
+ [-0.96932012 -0.76431675]
+ [-0.22435221 -0.7446414 ]
+ [-1.00114266  0.24829553]
+ [-0.0374667  -0.41356484]]
+
+
+Q :
+[[-0.08878777 -0.14341404]
+ [ 0.07627995 -0.19536302]
+ [ 0.38885663 -0.03886003]
+ [-0.87069894  0.50858641]]
+
+
+P_i = 
+[-1.00114266  0.24829553]
+
+
+Q[3,:] = 
+[-0.87069894  0.50858641]
+
+
+P[3,:] = 
+[-1.00114266  0.24829553]
+
+
+P[3,:] = 
+[-1.02041101  0.2598869 ]
+
+
+Q[3,:] = 
+[-0.87069894  0.50858641]
+
+
+Q[3,:] = 
+[-0.89358296  0.51412788]
+
+
+
+mf.P
+Out[9]: 
+array([[-0.92699867,  0.35551501],
+       [-0.96932012, -0.76431675],
+       [-0.22435221, -0.7446414 ],
+       [-1.02041101,  0.2598869 ],
+       [-0.0374667 , -0.41356484]])
+
+mf.Q
+Out[10]: 
+array([[-0.08878777, -0.14341404],
+       [ 0.07627995, -0.19536302],
+       [ 0.38885663, -0.03886003],
+       [-0.89358296,  0.51412788]])
+-------------------------------------------------------------------------------------
+Python code:
+mf.P = np.random.normal(scale=1./mf.K, size=(mf.num_users, mf.K))
+mf.Q = np.random.normal(scale=1./mf.K, size=(mf.num_items, mf.K))
+        
+# Initialize the biases
+mf.b_u = np.zeros(mf.num_users)
+mf.b_i = np.zeros(mf.num_items)
+mf.b = np.mean(mf.R[np.where(mf.R != 0)])
+        
+# Create a list of training samples
+mf.samples = [
+    (i, j, mf.R[i, j])
+    for i in range(mf.num_users)
+    for j in range(mf.num_items)
+    if mf.R[i, j] > 0
+]
+        
+# Perform stochastic gradient descent for number of iterations
+training_process = []
+np.random.shuffle(mf.samples)
+
+# take i = 3, j = 3, r = 4
+prediction = mf.get_rating(3, 3)
+e = (4 - prediction)
+print('e = ')
+print(e)
+print('\n')
+
+# Update biases
+mf.b_u[3] += mf.alpha * (e - mf.beta * mf.b_u[3])
+mf.b_i[3] += mf.alpha * (e - mf.beta * mf.b_i[3])
+
+print(mf.b_u)
+print('\n')
+print(mf.b_i)
+print('\n')
+
+print('P :')
+print(mf.P)
+print('\n')
+
+print('Q :')
+print(mf.Q)
+print('\n')
+
+
+P_i = mf.P[3, :][:]
+print('P_i = ')
+print(P_i)
+print('\n')
+
+print('Q[3,:] = ')
+print(mf.Q[3,:])
+print('\n')
+print('P[3,:] = ')
+print(mf.P[3,:])
+print('\n')
+mf.P[3, :] += mf.alpha * (e * mf.Q[3, :] - mf.beta * mf.P[3,:])
+print('P[3,:] = ')
+print(mf.P[3,:])
+print('\n')
+print('Q[3,:] = ')
+print(mf.Q[3,:])
+print('\n')
+mf.Q[3, :] += mf.alpha * (e * P_i - mf.beta * mf.Q[3,:])
+print('Q[3,:] = ')
+print(mf.Q[3,:])
+print('\n')
