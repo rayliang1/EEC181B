@@ -25,17 +25,17 @@ int main(){
     
     int x;
     for(x=0; x<2; x++){
-		    P[x] = P[x] + alpha * (e * Q[x] - beta * P[x]);
-		    P_i[x] = P[x];
+	P[x] = P[x] + alpha * (e * Q[x] - beta * P[x]);
+	P_i[x] = P[x];
         printf("%0.9f\n",P[x]);
     }   // P[0] = 0.23191049, P[1] = -0.07190137    <= original Python values
     
     printf("\n");
     for(x=0; x<2; x++){
-		    Q[x] = Q[x] + alpha * (e * P_i[x] - beta * Q[x]);
-		    printf("%0.9f\n",Q[x]);
-		    //printf("%0.9f * %0.9f = ", e, P_i[x]);
-		    //printf("%0.9f\n", e*P_i[x]);
+	Q[x] = Q[x] + alpha * (e * P_i[x] - beta * Q[x]);
+	printf("%0.9f\n",Q[x]);
+	//printf("%0.9f * %0.9f = ", e, P_i[x]);
+	//printf("%0.9f\n", e*P_i[x]);
     }   // Q[0] = -0.65202113, Q[1] = 0.09291451    <= original Python values
     
     return 0;
