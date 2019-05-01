@@ -172,8 +172,8 @@ float get_rating(int i, int j, int Prows, int Pcols, int Qrows, int Qcols){
 	float *A = (float*) malloc(lenA * sizeof(float));
 	float *B = (float*) malloc(lenB * sizeof(float));
 	for(k=0; k<lenA; k++){		// exporting P and Q into different 1D vectors A and B
-		A[i] = P[i][k];
-		B[i] = Q[j][k];
+		A[k] = P[i][k];
+		B[k] = Q[j][k];
 	}
 	
 	float prediction = b + b_u[i] + b_i[j] + vectordot(A,B,lenA,lenB);
