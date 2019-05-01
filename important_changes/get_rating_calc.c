@@ -66,9 +66,9 @@ float get_rating(int i, int j, int Prows, int Pcols, int Qrows, int Qcols){
 }	// Tested
 
 int main(){
-    //float e = 0.23279564738785163;
-    // Variables b_u, b_i, b, samples, samples_x, samples_y are ok
-    int i;
+    	//float e = 0.23279564738785163;
+    	// Variables b_u, b_i, b, samples, samples_x, samples_y are ok
+    	int i;
 	b_u = (float*)malloc(5 * sizeof(float));
 	b_i = (float*)malloc(4 * sizeof(float));
 	for(i=0; i<5; i++)
@@ -77,29 +77,29 @@ int main(){
 		b_i[i] = 0;
 		
 		
-    P = (float**)malloc(5*sizeof(float*));
-    for(i = 0; i<5; i++)
-    	P[i] = (float*)malloc(2*sizeof(float));
+    	P = (float**)malloc(5*sizeof(float*));
+    	for(i = 0; i<5; i++)
+    		P[i] = (float*)malloc(2*sizeof(float));
     
-    Q = (float**)malloc(4*sizeof(float*));
-    for(i=0; i<4; i++)
-    	Q[i] = (float*)malloc(2*sizeof(float));
+    	Q = (float**)malloc(4*sizeof(float*));
+    	for(i=0; i<4; i++)
+    		Q[i] = (float*)malloc(2*sizeof(float));
         
-    P[0][0] = -0.45385641; P[0][1] = 0.12240304;
-    P[1][0] = 0.10962749;  P[1][1] = -0.55365739;
-    P[2][0] = -0.21193127; P[2][1] = 0.32004102;
-    P[3][0] = 0.50767246;  P[3][1] = 0.40353577;
-    P[4][0] = -0.21690251; P[4][1] = -1.116791;
+    	P[0][0] = -0.45385641; P[0][1] = 0.12240304;
+    	P[1][0] = 0.10962749;  P[1][1] = -0.55365739;
+    	P[2][0] = -0.21193127; P[2][1] = 0.32004102;
+    	P[3][0] = 0.50767246;  P[3][1] = 0.40353577;
+    	P[4][0] = -0.21690251; P[4][1] = -1.116791;
     
-    Q[0][0] = -0.3499104;  Q[0][1] = 0.17541916;
-    Q[1][0] = -0.62551354; Q[1][1] = 0.15131101;
-    Q[2][0] = 0.03058709;  Q[2][1] = -0.59956074;
-    Q[3][0] = 0.39453033;  Q[3][1] = -0.22296095;
+    	Q[0][0] = -0.3499104;  Q[0][1] = 0.17541916;
+    	Q[1][0] = -0.62551354; Q[1][1] = 0.15131101;
+    	Q[2][0] = 0.03058709;  Q[2][1] = -0.59956074;
+    	Q[3][0] = 0.39453033;  Q[3][1] = -0.22296095;
     
-    printf("b = %0.9f\n", b);               // b should be 2.769230769230769
-    printf("b_u[3] = %0.9f\n", b_u[3]);     // b_u[3] = b_i[3] = 0
-    printf("b_i[3] = %0.9f\n", b_i[3]);
-    //printf("dotprod = %0.9f\n\n", vectordot())                    // dotprod = 0.11031946267490311 <= in Python
-    printf("get_rating(3,3) = %0.9f\n",get_rating(3,3,5,2,4,2));    // get_rating(3,3) = 2.8795502319056725 <= in Python
-    return 0;
+    	printf("b = %0.9f\n", b);               // b should be 2.769230769230769
+    	printf("b_u[3] = %0.9f\n", b_u[3]);     // b_u[3] = b_i[3] = 0
+    	printf("b_i[3] = %0.9f\n", b_i[3]);
+    	//printf("dotprod = %0.9f\n\n", vectordot())                    // dotprod = 0.11031946267490311 <= in Python
+    	printf("get_rating(3,3) = %0.9f\n",get_rating(3,3,5,2,4,2));    // get_rating(3,3) = 2.8795502319056725 <= in Python
+    	return 0;
 }
