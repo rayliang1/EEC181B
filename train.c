@@ -1,4 +1,5 @@
 // update: Changed P, Q assignment with lines taken from important_changes
+// update: Changed indexing from i to k on get_rating function
 // output: still nan
 
 #include <math.h>
