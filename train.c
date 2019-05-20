@@ -1,3 +1,68 @@
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+/* boxmuller.c           Implements the Polar form of the Box-Muller
+                         Transformation
+
+                      (c) Copyright 1994, Everett F. Carter Jr.
+                          Permission is granted by the author to use
+			  this software for any application provided this
+			  copyright notice is preserved.
+
+*/
+
+/* boxmuller.c           Implements the Polar form of the Box-Muller
+                         Transformation
+
+                      (c) Copyright 1994, Everett F. Carter Jr.
+                          Permission is granted by the author to use
+			  this software for any application provided this
+			  copyright notice is preserved.
+
+*/
+
+
+
+double gaussian(void)
+{
+   static double v, fac;
+   static int phase = 0;
+   double S, Z, U1, U2, u;
+
+   if (phase)
+      Z = v * fac;
+   else
+   {
+      do
+      {
+         U1 = (double)rand() / RAND_MAX;
+         U2 = (double)rand() / RAND_MAX;
+
+         u = 2. * U1 - 1.;
+         v = 2. * U2 - 1.;
+         S = u * u + v * v;
+      } while (S >= 0.5);
+
+      fac = sqrt (-2. * log(S) / S);
+      Z = u * fac;
+   }
+
+   phase = 1 - phase;
+
+   return Z;
+}
+
+
+
+
 // update: Changed P, Q assignment with lines taken from important_changes
 // update: Changed indexing from i to k on get_rating function
 // output: still nan
@@ -314,17 +379,26 @@ void train(){
 	Q = (float**)malloc(4*sizeof(float*));
 	for(i=0;i<4;i++)
 	    Q[i] = (float*)malloc(2*sizeof(float));
-	    
-	P[0][0]=-0.10647869; P[0][1]=1.29320198;
-	P[1][0]=-0.17975839; P[1][1]=0.90424228;
-	P[2][0]=0.37239126;  P[2][1]=-1.27146798;
-	P[3][0]=0.72194025;  P[3][1]=-0.75267798;
-	P[4][0]=0.05120293;  P[4][1]=-0.71838542;
+	for (i = 0; i < 5; i++) {
+	    for (j =0;j<2;j++) {
+	        P[i][j] = gaussian();
+	    }
+	}
+	for (i = 0; i < 4; i++) {
+	    for (j =0;2<2;j++) {
+	        Q[i][j] = gaussian();
+	    }
+	}
+//	P[0][0]=-0.10647869; P[0][1]=1.29320198;
+///	P[1][0]=-0.17975839; P[1][1]=0.90424228;
+//	P[2][0]=0.37239126;  P[2][1]=-1.27146798;
+//	P[3][0]=0.72194025;  P[3][1]=-0.75267798;
+//	P[4][0]=0.05120293;  P[4][1]=-0.71838542;
 	
-	Q[0][0]=-1.52001292; Q[0][1]=1.31483326;
-	Q[1][0]=1.10224395;  Q[1][1]=1.04025647;
-	Q[2][0]=1.11982426;  Q[2][1]=-0.27210834;
-	Q[3][0]=-0.09565345; Q[3][1]=-1.50853652;
+//	Q[0][0]=-1.52001292; Q[0][1]=1.31483326;
+//	Q[1][0]=1.10224395;  Q[1][1]=1.04025647;
+//	Q[2][0]=1.11982426;  Q[2][1]=-0.27210834;
+//	Q[3][0]=-0.09565345; Q[3][1]=-1.50853652;
 	
 	// Variables b_u, b_i, b, samples, samples_x, samples_y are ok
 	b_u = (float*)malloc(R_rows * sizeof(float));
@@ -426,7 +500,6 @@ int main(){
 	R = (float **)malloc(R_rows * sizeof(float*));
 	for(R_iterator=0; R_iterator<R_rows; R_iterator++)
     	R[R_iterator] = (float*)malloc(R_cols * sizeof(float));
-
     R[0][0] = 5;	R[0][1] = 3;	R[0][2] = 0;	R[0][3] = 1;
     R[1][0] = 4;	R[1][1] = 0;	R[1][2] = 0;	R[1][3] = 1;    
     R[2][0] = 1;	R[2][1] = 1;	R[2][2] = 0;	R[2][3] = 5;
@@ -546,3 +619,8 @@ int main(){
 	return 0;
 }
 */
+
+
+
+
+
